@@ -42,6 +42,13 @@ void Tree::print() const
 
 Node* Tree::find(Node* cur, const int value)
 {
+  if (cur == nullptr || cur->value() == value)
+    	return cur;
+
+  if (value < cur->value())
+    	return find(cur->m_left, value);
+
+  return find(cur->m_right, value);
 }
 
 void Tree::right_rotate(Node*& gparent)
@@ -50,6 +57,22 @@ void Tree::right_rotate(Node*& gparent)
 
 void Tree::left_rotate(Node*& gparent)
 {
+  	Node* right = gparent->m_right;
+  	Node* tmp = right->m_left;
+	right->m_left = gparent;
+	gparent->m_right = tmp;
+
+	int maxheight;
+
+	maxheight = max(height(gparent->m_left), height(gparent->m_right));
+	
+	gparent->set_height(maxheight + 1);
+
+	maxheight = max(height(right->m_left), height(right->m_right));
+
+	right -> set_height(maxheight + 1);
+
+	gparent = right;
 }
 
 void Tree::left_right_rotate(Node*& gparent)
@@ -79,7 +102,20 @@ void Tree::right_left_rotate(Node*& gparent)
 
 void Tree::insert(Node*& cur, const int value)
 {
-
+	Node* n = new Node(value);
+	if(cur == nullptr) //If at leaf, insert node
+	{
+	  cur = n;
+	  return;
+	}
+	else if(value <= cur->value())
+	{
+	  insert(cur->m_left, value);
+	}
+	else
+	{
+	  insert(cur->m_right,value);
+	}
 }
 
 Node* Tree::min(Node* const cur) const
