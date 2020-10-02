@@ -1,22 +1,21 @@
 #ifndef NODE_H
 #define NODE_H
 #include <QPoint>
+
 class Node {
 	private:
 	int m_value;
-	QPoint(int xpos, int ypos) point;
-
+	QPoint m_point;
 	int m_height;
 
 	public:
-	Node* point;
-	Node* m_left;
-	Node* m_right;
-
 	Node();
 	Node(const int value);
 	~Node();
 
+	Node* m_left;
+	Node* m_right;
+	
 	int value() const;
 	int height() const;
 

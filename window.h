@@ -2,21 +2,22 @@
 #include <QWidget>
 #include <QToolBar>
 #include <QAction>
-
+#include "tree.h"
 
 #ifndef __WINDOW_H
 #define __WINDOW_H
 
-class QHBoxLayout;
+class QVBoxLayout;
 class QMouseEvent;
 class QMenuBar;
 class QMenu;
+class QImage;
+class QLabel;
 
 class Window : public QMainWindow
 {
 	Q_OBJECT
 	private:
-		QMenu* m_menu;
 		QToolBar* m_toolbar;
 		QAction* m_filemenu;
 		QAction* m_savemenu;
@@ -24,6 +25,11 @@ class Window : public QMainWindow
 		QAction* m_modify;
 		QAction* m_stats;
 		QAction* m_quit;
+		QLabel* m_display;
+		QVBoxLayout* m_layout;
+		QImage* m_loaded_image;
+		Tree m_tree;
+
 	private slots:
 		void import_image();
 		void save_image();

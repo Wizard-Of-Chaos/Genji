@@ -1,6 +1,6 @@
 #include "node.h"
 
-Node::Node() : m_value{0}, m_height{1}, m_left{nullptr}, m_right{nullptr}, point{0,0}
+Node::Node() : m_value{0}, m_height{1}, m_left{nullptr}, m_right{nullptr}, m_point{0,0}
 { }
 
 Node::Node(const int value) : m_value{value}, m_height{1}, m_left{nullptr}, m_right{nullptr}
