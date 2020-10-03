@@ -17,9 +17,9 @@ Node* Tree::find(const unsigned int value)
 	return find(m_root, value);
 }
 
-void Tree::insert(const unsigned int value, QPoint point)
+void Tree::insert(const unsigned int value)
 {
-	insert(m_root, value, point);
+	insert(m_root, value);
 }
 
 void Tree::remove(const unsigned int value)
@@ -43,10 +43,10 @@ void Tree::print() const
 
 Node* Tree::find(Node* cur, const unsigned int value)
 {
-  if (cur == nullptr || cur->value() == value)
+  if (cur == nullptr || cur->key() == value)
     	return cur;
 
-  if (value < cur->value())
+  if (value < cur->key())
     	return find(cur->m_left, value);
 
   return find(cur->m_right, value);
@@ -101,22 +101,21 @@ void Tree::right_left_rotate(Node*& gparent)
 {
 }
 
-void Tree::insert(Node*& cur, const unsigned int value, QPoint point)
+void Tree::insert(Node*& cur, const unsigned int value)
 {
 	Node* n = new Node(value);
-	n->set_point(point);
 	if(cur == nullptr) //If at leaf, insert node
 	{
 	  cur = n;
 	  return;
 	}
-	else if(value <= cur->value())
+	else if(value <= cur->key())
 	{
-	  insert(cur->m_left, value, point);
+	  insert(cur->m_left, value);
 	}
 	else
 	{
-	  insert(cur->m_right,value, point);
+	  insert(cur->m_right,value);
 	}
 }
 
@@ -139,7 +138,7 @@ void Tree::print(Node* cur, int count) const
 {
 	if (!cur) return;
 	++count;
-	cout << "Current node has value " << cur->value() << "and height " << cur->height() << "." << "This is node #" << count << "." << endl;
+	cout << "Current node has value " << cur->key() << "and height " << cur->height() << "." << "This is node #" << count << "." << endl;
 	if (cur->m_left) {
 		cout << "Found left node." << endl;
 		print(cur->m_left, count);
@@ -153,22 +152,22 @@ void Tree::print(Node* cur, int count) const
 void Tree::debug(Node* cur) const
 {
 	if (!cur) return;
-	cout << "\t" << "node" << cur->value() << " " << "[ label = \"" << cur->value()  << " [" << cur->height() << "]\", fillcolor = blue, color = black, style = filled, fontcolor = white, fontsize = 24 ];" << endl;
+	cout << "\t" << "node" << cur->key() << " " << "[ label = \"" << cur->key()  << " [" << cur->height() << "]\", fillcolor = blue, color = black, style = filled, fontcolor = white, fontsize = 24 ];" << endl;
 	if (cur->m_left) {
 		debug(cur->m_left);
-		cout << "\tnode" << cur->value() << " -> " << "node" << cur->m_left->value() << "[ K = 0.1 ];" << endl;
+		cout << "\tnode" << cur->key() << " -> " << "node" << cur->m_left->key() << "[ K = 0.1 ];" << endl;
 	}
 	else {
-		cout << "left_null" << cur->value() << " [label=\"\", shape = none ];" << endl;
-		cout << "\tnode" << cur->value() << " -> " << "left_null" << cur->value() << "[arrowhead = tee];" << endl;
+		cout << "left_null" << cur->key() << " [label=\"\", shape = none ];" << endl;
+		cout << "\tnode" << cur->key() << " -> " << "left_null" << cur->key() << "[arrowhead = tee];" << endl;
 	}
 
 	if (cur->m_right) {
 		debug(cur->m_right);
-		cout << "\tnode" << cur->value() << " -> " << "node" << cur->m_right->value() << "[ K = 0.1 ];" << endl;
+		cout << "\tnode" << cur->key() << " -> " << "node" << cur->m_right->key() << "[ K = 0.1 ];" << endl;
 	}
 	else {
-		cout << "right_null" << cur->value() << " [label=\"\", shape = none ];" << endl;
-		cout << "\tnode" << cur->value() << " -> " << "right_null" << cur->value() << "[arrowhead = tee];" << endl;
+		cout << "right_null" << cur->key() << " [label=\"\", shape = none ];" << endl;
+		cout << "\tnode" << cur->key() << " -> " << "right_null" << cur->key() << "[arrowhead = tee];" << endl;
 	}
 }

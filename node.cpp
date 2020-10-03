@@ -1,9 +1,9 @@
 #include "node.h"
 
-Node::Node() : m_value{0}, m_height{1}, m_left{nullptr}, m_right{nullptr}, m_point{0,0}
+Node::Node() : m_key{0}, m_height{1}, m_left{nullptr}, m_right{nullptr}
 { }
 
-Node::Node(const unsigned int value) : m_value{value}, m_height{1}, m_left{nullptr}, m_right{nullptr}
+Node::Node(const unsigned int value) : m_key{value}, m_height{1}, m_left{nullptr}, m_right{nullptr}
 { }
 
 Node::~Node()
@@ -12,9 +12,9 @@ Node::~Node()
 	if (m_right) delete m_right;
 }
 
-unsigned int Node::value() const
+unsigned int Node::key() const
 {
-	return m_value;
+	return m_key;
 }
 
 int Node::height() const
@@ -22,9 +22,9 @@ int Node::height() const
 	return m_height;
 }
 
-void Node::set_value(const unsigned int value)
+void Node::set_key(const unsigned int value)
 {
-	m_value = value;
+	m_key = value;
 }
 
 void Node::set_height(const int height)
@@ -32,7 +32,7 @@ void Node::set_height(const int height)
 	m_height = height;
 }
 
-void Node::set_point(QPoint point)
+QList<QPoint>& Node::list()
 {
-	m_point = point;
+	return m_point_list;
 }

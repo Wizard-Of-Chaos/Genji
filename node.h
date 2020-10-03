@@ -1,27 +1,28 @@
 #ifndef NODE_H
 #define NODE_H
 #include <QPoint>
+#include <QList>
+#include <QColor>
 
 class Node {
 	private:
-	unsigned int m_value;
-	QPoint m_point;
+	unsigned int m_key;
+	QList<QPoint> m_point_list;
 	int m_height;
 
 	public:
 	Node();
-	Node(const unsigned int value);
+	Node(const unsigned int key);
 	~Node();
 
 	Node* m_left;
 	Node* m_right;
 	
-	unsigned int value() const;
+	unsigned int key() const;
 	int height() const;
 
-	void set_value(const unsigned int value);
+	void set_key(const unsigned int key);
 	void set_height(const int height);
-	void set_point(const QPoint point);
-
+	QList<QPoint>& list();
 };
 #endif //NODE_H
