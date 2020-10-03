@@ -13,7 +13,7 @@ class Tree {
 	Node* m_root;
 
 	Node* find(Node* cur, const int value);
-	void insert(Node*& cur, const int value);
+	void insert(Node*& cur, const int value, QPoint point);
 	void remove(Node*& cur, const int value);
 	void print(Node* cur) const;
 	void debug(Node* cur) const;
@@ -42,7 +42,7 @@ class Tree {
 	~Tree();
 
 	Node* find(const int value);
-	void insert(const int value);
+	void insert(const int value, QPoint point);
 	void remove(const int value);
 	void print() const;
 	void debug() const;

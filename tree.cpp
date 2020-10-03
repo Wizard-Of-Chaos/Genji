@@ -17,9 +17,9 @@ Node* Tree::find(const int value)
 	return find(m_root, value);
 }
 
-void Tree::insert(const int value)
+void Tree::insert(const int value, QPoint point)
 {
-	insert(m_root, value);
+	insert(m_root, value, point);
 }
 
 void Tree::remove(const int value)
@@ -100,7 +100,7 @@ void Tree::right_left_rotate(Node*& gparent)
 {
 }
 
-void Tree::insert(Node*& cur, const int value)
+void Tree::insert(Node*& cur, const int value, QPoint point)
 {
 	Node* n = new Node(value);
 	if(cur == nullptr) //If at leaf, insert node
@@ -110,11 +110,11 @@ void Tree::insert(Node*& cur, const int value)
 	}
 	else if(value <= cur->value())
 	{
-	  insert(cur->m_left, value);
+	  insert(cur->m_left, value, point);
 	}
 	else
 	{
-	  insert(cur->m_right,value);
+	  insert(cur->m_right,value, point);
 	}
 }
 
