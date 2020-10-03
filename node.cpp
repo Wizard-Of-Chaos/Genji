@@ -31,3 +31,8 @@ void Node::set_height(const int height)
 {
 	m_height = height;
 }
+
+void Node::set_point(QPoint point)
+{
+	m_point = point;
+}

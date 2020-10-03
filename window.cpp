@@ -67,7 +67,7 @@ void Window::import_image()
 
 	for (int x = 0; x < image.width(); ++x) {
 		for (int y = 0; y < image.height(); ++y) {
-			m_tree.insert(image.pixel(x, y));			
+			m_tree.insert(image.pixel(x, y), QPoint(x, y));			
 		}
 	} //Nested for loops - for when you're just too lazy.
 	m_tree.debug();

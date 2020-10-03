@@ -103,6 +103,7 @@ void Tree::right_left_rotate(Node*& gparent)
 void Tree::insert(Node*& cur, const int value, QPoint point)
 {
 	Node* n = new Node(value);
+	n->set_point(point);
 	if(cur == nullptr) //If at leaf, insert node
 	{
 	  cur = n;
