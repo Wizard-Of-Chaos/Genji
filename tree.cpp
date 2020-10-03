@@ -12,17 +12,17 @@ Tree::~Tree()
 	delete m_root;
 }
 
-Node* Tree::find(const int value)
+Node* Tree::find(const unsigned int value)
 {
 	return find(m_root, value);
 }
 
-void Tree::insert(const int value, QPoint point)
+void Tree::insert(const unsigned int value, QPoint point)
 {
 	insert(m_root, value, point);
 }
 
-void Tree::remove(const int value)
+void Tree::remove(const unsigned int value)
 {
 	remove(m_root, value);
 }
@@ -37,10 +37,11 @@ void Tree::debug() const
 
 void Tree::print() const
 {
-	print(m_root);
+	int counter = 0;
+	print(m_root, counter);
 }
 
-Node* Tree::find(Node* cur, const int value)
+Node* Tree::find(Node* cur, const unsigned int value)
 {
   if (cur == nullptr || cur->value() == value)
     	return cur;
@@ -100,7 +101,7 @@ void Tree::right_left_rotate(Node*& gparent)
 {
 }
 
-void Tree::insert(Node*& cur, const int value, QPoint point)
+void Tree::insert(Node*& cur, const unsigned int value, QPoint point)
 {
 	Node* n = new Node(value);
 	n->set_point(point);
@@ -129,24 +130,23 @@ Node* Tree::min(Node* const cur) const
 		return min(cur->m_left);	
 }
 
-void Tree::remove(Node*& cur, const int value)
+void Tree::remove(Node*& cur, const unsigned int value)
 {
 
 }
 
-void Tree::print(Node* cur) const
+void Tree::print(Node* cur, int count) const
 {
-	int nodecounter = 0;
 	if (!cur) return;
-	++nodecounter;
-	cout << "Current node has value " << cur->value() << "and height " << cur->height() << "." << "This is node #" << nodecounter << "." << endl;
+	++count;
+	cout << "Current node has value " << cur->value() << "and height " << cur->height() << "." << "This is node #" << count << "." << endl;
 	if (cur->m_left) {
 		cout << "Found left node." << endl;
-		print(cur->m_left);
+		print(cur->m_left, count);
 	}
 	if (cur->m_right) {
 		cout << "Found right node." << endl;
-		print(cur->m_right);
+		print(cur->m_right, count);
 	}
 }
 

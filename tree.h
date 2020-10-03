@@ -12,10 +12,10 @@ class Tree {
 	private:
 	Node* m_root;
 
-	Node* find(Node* cur, const int value);
-	void insert(Node*& cur, const int value, QPoint point);
-	void remove(Node*& cur, const int value);
-	void print(Node* cur) const;
+	Node* find(Node* cur, const unsigned int value);
+	void insert(Node*& cur, const unsigned int value, QPoint point);
+	void remove(Node*& cur, const unsigned int value);
+	void print(Node* cur, int counter) const;
 	void debug(Node* cur) const;
 
 	void left_rotate(Node*& gparent);
@@ -41,9 +41,9 @@ class Tree {
 	Tree();
 	~Tree();
 
-	Node* find(const int value);
-	void insert(const int value, QPoint point);
-	void remove(const int value);
+	Node* find(const unsigned int value);
+	void insert(const unsigned int value, QPoint point);
+	void remove(const unsigned int value);
 	void print() const;
 	void debug() const;
 };
