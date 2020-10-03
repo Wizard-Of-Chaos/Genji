@@ -17,9 +17,9 @@ Node* Tree::find(const unsigned int value)
 	return find(m_root, value);
 }
 
-void Tree::insert(const unsigned int value)
+void Tree::insert(const unsigned int value, QPoint p)
 {
-	insert(m_root, value);
+	insert(m_root, value, p);
 }
 
 void Tree::remove(const unsigned int value)
@@ -101,21 +101,29 @@ void Tree::right_left_rotate(Node*& gparent)
 {
 }
 
-void Tree::insert(Node*& cur, const unsigned int value)
+void Tree::insert(Node*& cur, const unsigned int value, QPoint p)
 {
+	Node* val = find(value);
+	if(val) {
+		QList<QPoint> l = val->list();
+	        l.push_back(p);
+		return;
+	}
 	Node* n = new Node(value);
+	n->list().push_back(p);
 	if(cur == nullptr) //If at leaf, insert node
 	{
 	  cur = n;
+
 	  return;
 	}
 	else if(value <= cur->key())
 	{
-	  insert(cur->m_left, value);
+	  insert(cur->m_left, value, p);
 	}
 	else
 	{
-	  insert(cur->m_right,value);
+	  insert(cur->m_right,value, p);
 	}
 }
 
