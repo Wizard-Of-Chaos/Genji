@@ -70,7 +70,7 @@ void Window::import_image()
 			m_tree.insert(image.pixel(x, y), QPoint(x, y));			
 		}
 	} //Nested for loops - for when you're just too lazy.
-	m_tree.debug();
+	m_tree.print();
 }
 
 void Window::save_image()

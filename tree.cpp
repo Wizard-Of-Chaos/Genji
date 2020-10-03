@@ -37,7 +37,7 @@ void Tree::debug() const
 
 void Tree::print() const
 {
-
+	print(m_root);
 }
 
 Node* Tree::find(Node* cur, const int value)
@@ -136,7 +136,18 @@ void Tree::remove(Node*& cur, const int value)
 
 void Tree::print(Node* cur) const
 {
-
+	int nodecounter = 0;
+	if (!cur) return;
+	++nodecounter;
+	cout << "Current node has value " << cur->value() << "and height " << cur->height() << "." << "This is node #" << nodecounter << "." << endl;
+	if (cur->m_left) {
+		cout << "Found left node." << endl;
+		print(cur->m_left);
+	}
+	if (cur->m_right) {
+		cout << "Found right node." << endl;
+		print(cur->m_right);
+	}
 }
 
 void Tree::debug(Node* cur) const
