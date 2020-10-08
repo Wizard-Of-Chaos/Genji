@@ -65,16 +65,19 @@ void Window::import_image()
 	m_display->setPixmap(QPixmap::fromImage(image));	
 	m_loaded_image->load(filename);
 
-//	for (int x = 0; x < image.width(); ++x) {
-//		for (int y = 0; y < image.height(); ++y) {
-//			m_tree.insert(image.pixel(x, y), QPoint(x, y));			
-//		}
-//	} //Nested for loops - for when you're just too lazy.
-//	m_tree.print();
+	for (int x = 0; x < image.width(); ++x) {
+		for (int y = 0; y < image.height(); ++y) {
+			m_tree.insert(image.pixel(x, y), QPoint(x, y));			
+		}
+	} //Nested for loops - for when you're just too lazy.
+	m_tree.print();
 }
 
 void Window::save_image()
 {
+	bool ok;
+	QString filename = QInputDialog::getText(this, tr("Save"), tr("Enter the name and extension of the file you want to save:"), QLineEdit::Normal, QDir::home().dirName(), &ok);
+	m_loaded_image->save(filename, nullptr, -1);
 }
 
 void Window::modify_image()
@@ -83,4 +86,5 @@ void Window::modify_image()
 
 void Window::stats()
 {
+
 }
