@@ -103,12 +103,10 @@ void Window::modify_image()
 		msgBox.exec();
 		return;
 	}
-	QColor nullcolor = QColor(255, 255, 255, 255);
 	for (QPoint p : found->list()) {
-		m_loaded_image->setPixelColor(p, nullcolor);
+		m_loaded_image->setPixel(p, qRgb(255, 255, 255));
 	}
 	m_tree.remove(key);
-	cout << "Removing color." << endl;
 	m_display->setPixmap(QPixmap::fromImage(*m_loaded_image));
 }
 
