@@ -12,9 +12,9 @@ class Tree {
 	private:
 	Node* m_root;
 
-	Node* find(Node* cur, const unsigned int key);
-	void insert(Node*& cur, const unsigned int key, QPoint p);
-	void remove(Node*& cur, const unsigned int key);
+	Node* find(Node* cur, const QRgb key);
+	void insert(Node*& cur, const QRgb key);
+	void remove(Node*& cur, const QRgb key);
 	void print(Node* cur, int counter) const;
 	void debug(Node* cur) const;
 
@@ -41,9 +41,9 @@ class Tree {
 	Tree();
 	~Tree();
 
-	Node* find(const unsigned int key);
-	void insert(const unsigned int key, QPoint p);
-	void remove(const unsigned int key);
+	Node* find(const QRgb key);
+	void insert(const QRgb key);
+	void remove(const QRgb key);
 	void print() const;
 	void debug() const;
 };

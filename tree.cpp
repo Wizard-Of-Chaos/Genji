@@ -12,17 +12,17 @@ Tree::~Tree()
 	delete m_root;
 }
 
-Node* Tree::find(const unsigned int value)
+Node* Tree::find(const QRgb value)
 {
 	return find(m_root, value);
 }
 
-void Tree::insert(const unsigned int value, QPoint p)
+void Tree::insert(const QRgb value)
 {
-	insert(m_root, value, p);
+	insert(m_root, value);
 }
 
-void Tree::remove(const unsigned int value)
+void Tree::remove(const QRgb value)
 {
 	remove(m_root, value);
 }
@@ -41,7 +41,7 @@ void Tree::print() const
 	print(m_root, counter);
 }
 
-Node* Tree::find(Node* cur, const unsigned int value)
+Node* Tree::find(Node* cur, const QRgb value)
 {
   if (cur == nullptr || cur->key() == value)
     	return cur;
@@ -134,16 +134,13 @@ void Tree::right_left_rotate(Node*& gparent)
 	gparent = rl;
 }
 
-void Tree::insert(Node*& cur, const unsigned int value, QPoint p)
+void Tree::insert(Node*& cur, const QRgb value)
 {
 	Node* val = find(value);
 	if(val) {
-		QList<QPoint> l = val->list();
-	        l.push_back(p);
 		return;
 	}
 	Node* n = new Node(value);
-	n->list().push_back(p);
 	if(cur == nullptr) //If at leaf, insert node
 	{
 	  cur = n;
@@ -152,11 +149,11 @@ void Tree::insert(Node*& cur, const unsigned int value, QPoint p)
 	}
 	else if(value <= cur->key())
 	{
-	  insert(cur->m_left, value, p);
+	  insert(cur->m_left, value);
 	}
 	else
 	{
-	  insert(cur->m_right,value, p);
+	  insert(cur->m_right,value);
 	}
 
 	int max_height = max(height(cur->m_left), height(cur->m_right));
@@ -207,16 +204,41 @@ Node* Tree::min(Node* const cur) const
 		return min(cur->m_left);	
 }
 
-void Tree::remove(Node*& cur, const unsigned int value)
+void Tree::remove(Node*& cur, const QRgb value)
 {
-	
+	if(cur == nullptr) {
+		return;
+	}
+	if (value < cur->key()) {
+		remove(cur->m_left, value);
+	} else if (value > cur->key()) {
+		remove(cur->m_right, value);
+	} else {
+		if(cur->m_right == nullptr && cur->m_left == nullptr) {
+			delete cur;
+			cur = nullptr;
+		} else if(cur->m_right == nullptr) {
+			Node* tmp = cur;
+			cur = cur->m_left;
+			delete tmp;
+		} else if(cur->m_left == nullptr) {
+			Node* tmp = cur;
+			cur = cur->m_right;
+			delete tmp;
+		} else {
+			Node* tmp = min(cur->m_right);
+			cur->list() = tmp->list();
+			cur->set_key(value);
+			remove(cur->m_right, tmp->key());
+		}
+	}
 }
 
 void Tree::print(Node* cur, int count) const
 {
 	if (!cur) return;
 	++count;
-	cout << "Current node has value " << cur->key() << "and height " << cur->height() << "." << "This is node #" << count << "." << endl;
+	cout << "Current node has value " << cur->key() << " and height " << cur->height() << ". This is node #" << count << "." << endl;
 	if (cur->m_left) {
 		cout << "Found left node." << endl;
 		print(cur->m_left, count);

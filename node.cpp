@@ -3,7 +3,7 @@
 Node::Node() : m_key{0}, m_height{1}, m_left{nullptr}, m_right{nullptr}
 { }
 
-Node::Node(const unsigned int value) : m_key{value}, m_height{1}, m_left{nullptr}, m_right{nullptr}
+Node::Node(const QRgb value) : m_key{value}, m_height{1}, m_left{nullptr}, m_right{nullptr}
 { }
 
 Node::~Node()
@@ -12,7 +12,7 @@ Node::~Node()
 	if (m_right) delete m_right;
 }
 
-unsigned int Node::key() const
+QRgb Node::key() const
 {
 	return m_key;
 }
@@ -22,7 +22,7 @@ int Node::height() const
 	return m_height;
 }
 
-void Node::set_key(const unsigned int value)
+void Node::set_key(const QRgb value)
 {
 	m_key = value;
 }

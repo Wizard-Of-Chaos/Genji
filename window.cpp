@@ -13,6 +13,7 @@
 #include <QImage>
 #include <QtGui>
 #include <QApplication>
+#include <QMessageBox>
 
 //The include tower begins!
 //Please direct all complaints about the include tower to Alexander Wiecking or Michael Eddins; whoever happens to be closer.
@@ -67,7 +68,8 @@ void Window::import_image()
 
 	for (int x = 0; x < image.width(); ++x) {
 		for (int y = 0; y < image.height(); ++y) {
-			m_tree.insert(image.pixel(x, y), QPoint(x, y));			
+			m_tree.insert(image.pixel(x, y));
+			m_tree.find(image.pixel(x, y))->list().push_back(QPoint(x, y));
 		}
 	} //Nested for loops - for when you're just too lazy.
 	m_tree.print();
@@ -82,6 +84,32 @@ void Window::save_image()
 
 void Window::modify_image()
 {
+	bool ok;
+	int red = QInputDialog::getInt(this, tr("Red"), tr("Enter the 'Red' value of the color you want to remove (try the stats function to get a list of colors in the image):"), 0, 0, 255, 1, &ok);
+
+	int green = QInputDialog::getInt(this, tr("Green"), tr("Enter the 'Green' value of the color you want to remove:"), 0, 0, 255, 1, &ok);
+
+	int blue = QInputDialog::getInt(this, tr("Blue"), tr("Enter the 'Blue' value of the color you want to remove:"), 0, 0, 255, 1, &ok);
+
+	int alpha = QInputDialog::getInt(this, tr("Alpha"), tr("Enter the 'Alpha' value of the color you want to remove (255 by default):"), 0, 0, 255, 1, &ok);
+
+	QColor color = QColor(red, green, blue, alpha);
+	QRgb key = color.rgb();
+	Node* found = m_tree.find(key);
+	if(!found) {
+		QMessageBox msgBox;
+		msgBox.setWindowTitle(tr("Error"));
+		msgBox.setText("No matching color was found in the image.");
+		msgBox.exec();
+		return;
+	}
+	QColor nullcolor = QColor(255, 255, 255, 255);
+	for (QPoint p : found->list()) {
+		m_loaded_image->setPixelColor(p, nullcolor);
+	}
+	m_tree.remove(key);
+	cout << "Removing color." << endl;
+	m_display->setPixmap(QPixmap::fromImage(*m_loaded_image));
 }
 
 void Window::stats()

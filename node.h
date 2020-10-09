@@ -6,22 +6,22 @@
 
 class Node {
 	private:
-	unsigned int m_key;
+	QRgb m_key;
 	QList<QPoint> m_point_list;
 	int m_height;
 
 	public:
 	Node();
-	Node(const unsigned int key);
+	Node(QRgb key);
 	~Node();
 
 	Node* m_left;
 	Node* m_right;
 	
-	unsigned int key() const;
+	QRgb key() const;
 	int height() const;
 
-	void set_key(const unsigned int key);
+	void set_key(const QRgb key);
 	void set_height(const int height);
 	QList<QPoint>& list();
 };
