@@ -116,14 +116,16 @@ void Window::stats()
 	string rgbs = "Colors in the image are: \n";
 	for (QRgb n : m_tree.keys())
 	{
-		rgbs += QColor(n).red();
+		rgbs += qRed(n);
+		cout << qRed(n);
 		rgbs += ", ";
-		rgbs += QColor(n).green();
+		rgbs += qGreen(n);
 		rgbs += ", ";
-		rgbs += QColor(n).blue();
+		rgbs += qBlue(n);
 		rgbs += "\n";
 	}
 	QMessageBox msg_box;
+	msg_box.setWindowTitle(tr("Colors!"));
 	msg_box.setText(QString::fromStdString(rgbs));
 	msg_box.exec();
 }

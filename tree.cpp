@@ -259,17 +259,13 @@ vector<QRgb> Tree::keys()
 void Tree::keys(Node* cur, vector<QRgb> & key_rgbs)
 {
 	if(!cur) return;
-	for(QRgb k : key_rgbs)
-	{
-		if(cur->key() == k) return;
-
 		key_rgbs.push_back(cur->key());
-
+		cout << cur->key() << endl;
 		if (cur->m_left)
 		  keys(cur->m_left, key_rgbs);
 		if (cur->m_right)
 		  keys(cur->m_right, key_rgbs);
-	}
+
 }
 
 
