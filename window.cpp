@@ -15,6 +15,7 @@
 #include <QApplication>
 #include <QMessageBox>
 #include <QString>
+#include <string>
 
 //The include tower begins!
 //Please direct all complaints about the include tower to Alexander Wiecking or Michael Eddins; whoever happens to be closer.
@@ -116,12 +117,11 @@ void Window::stats()
 	string rgbs = "Colors in the image are: \n";
 	for (QRgb n : m_tree.keys())
 	{
-		rgbs += qRed(n);
-		cout << qRed(n);
+		rgbs += std::to_string(qRed(n));
 		rgbs += ", ";
-		rgbs += qGreen(n);
+		rgbs += std::to_string(qGreen(n));
 		rgbs += ", ";
-		rgbs += qBlue(n);
+		rgbs += std::to_string(qBlue(n));
 		rgbs += "\n";
 	}
 	QMessageBox msg_box;
