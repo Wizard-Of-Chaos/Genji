@@ -122,6 +122,8 @@ void Window::stats()
 		rgbs += std::to_string(qGreen(n));
 		rgbs += ", ";
 		rgbs += std::to_string(qBlue(n));
+		rgbs += ". Total pixels: ";
+		rgbs += std::to_string(m_tree.find(n)->list().size());
 		rgbs += "\n";
 	}
 	QMessageBox msg_box;
