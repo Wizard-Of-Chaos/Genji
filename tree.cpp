@@ -173,7 +173,7 @@ void Tree::insert(Node*& cur, const QRgb value)
 		}	
 		else
 		{
-		  left_rotate(cur);
+		  left_right_rotate(cur);
 		}
 	    }
 	 
@@ -185,11 +185,11 @@ void Tree::insert(Node*& cur, const QRgb value)
 
 	   if(height(left_gchild) > height(right_gchild))
 	   {
-	     left_rotate(cur);
+	     right_left_rotate(cur);
 	   }
    	   else
 	   {
-	     right_rotate(cur);
+	     left_rotate(cur);
 	   }	     
 	 }
 }

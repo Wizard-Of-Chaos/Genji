@@ -128,6 +128,6 @@ void Window::stats()
 	}
 	QMessageBox msg_box;
 	msg_box.setWindowTitle(tr("Colors!"));
-	msg_box.setText(QString::fromStdString(rgbs));
+	msg_box.setDetailedText(QString::fromStdString(rgbs));
 	msg_box.exec();
 }
