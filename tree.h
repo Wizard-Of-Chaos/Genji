@@ -23,6 +23,8 @@ class Tree {
 	void left_right_rotate(Node*& gparent);
 	void right_left_rotate(Node*& gparent);
 
+	void keys(Node* cur, vector<QRgb> & keys);
+
 	Node* min(Node* const cur) const;
 
 	static int max(const int a, const int b)
@@ -46,6 +48,7 @@ class Tree {
 	void remove(const QRgb key);
 	void print() const;
 	void debug() const;
+	vector<QRgb> keys();
 };
 
 #endif //TREE_H

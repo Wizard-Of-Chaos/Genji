@@ -14,6 +14,7 @@
 #include <QtGui>
 #include <QApplication>
 #include <QMessageBox>
+#include <QString>
 
 //The include tower begins!
 //Please direct all complaints about the include tower to Alexander Wiecking or Michael Eddins; whoever happens to be closer.
@@ -112,5 +113,17 @@ void Window::modify_image()
 
 void Window::stats()
 {
-
+	string rgbs = "Colors in the image are: \n";
+	for (QRgb n : m_tree.keys())
+	{
+		rgbs += QColor(n).red();
+		rgbs += ", ";
+		rgbs += QColor(n).green();
+		rgbs += ", ";
+		rgbs += QColor(n).blue();
+		rgbs += "\n";
+	}
+	QMessageBox msg_box;
+	msg_box.setText(QString::fromStdString(rgbs));
+	msg_box.exec();
 }

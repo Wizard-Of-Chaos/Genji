@@ -249,6 +249,30 @@ void Tree::print(Node* cur, int count) const
 	}
 }
 
+vector<QRgb> Tree::keys()
+{
+	vector<QRgb> key_rgbs;
+	keys(m_root, key_rgbs);
+	return key_rgbs;
+}
+
+void Tree::keys(Node* cur, vector<QRgb> & key_rgbs)
+{
+	if(!cur) return;
+	for(QRgb k : key_rgbs)
+	{
+		if(cur->key() == k) return;
+
+		key_rgbs.push_back(cur->key());
+
+		if (cur->m_left)
+		  keys(cur->m_left, key_rgbs);
+		if (cur->m_right)
+		  keys(cur->m_right, key_rgbs);
+	}
+}
+
+
 void Tree::debug(Node* cur) const
 {
 	if (!cur) return;
